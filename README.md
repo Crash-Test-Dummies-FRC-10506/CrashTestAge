@@ -1,2 +1,3 @@
-# Crash Test Skeleton
-Basically our next robot code make sure to remove the a from the .wpilib and .vscode anyways gn
+# CrashTestAge
+FRC Rebuilt robot code for FRC 10506
+## Remove the a from .wpilib and .vscode
