@@ -5,6 +5,8 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.ResetMode;
 import com.revrobotics.PersistMode;
+import com.studica.frc.AHRS;
+import com.studica.frc.AHRS.NavXComType;
 
 import frc.robot.Constants.HardwareConstants;
 
@@ -29,10 +31,10 @@ public class MechanumDrive extends SubsystemBase {
 
     private final MecanumDrive m_robotDrive;
     
-    //private final AHRS m_gyro = new AHRS(NavXComType.kMXP_SPI);
+    private final AHRS m_gyro = new AHRS(NavXComType.kMXP_SPI);
 
     public MechanumDrive() {
-        //m_gyro.zeroYaw();
+        m_gyro.reset();
 
         m_frontLeft = new SparkMax(HardwareConstants.kFrontLeftMotorID, MotorType.kBrushed);
         m_rearLeft = new SparkMax(HardwareConstants.kRearLeftMotorID, MotorType.kBrushed);
@@ -54,14 +56,14 @@ public class MechanumDrive extends SubsystemBase {
         
         m_robotDrive = new MecanumDrive(m_frontLeft::set, m_rearLeft::set, m_frontRight::set, val -> m_rearRight.set(-val));
         
-        //SmartDashboard.putData(m_gyro);
+        SmartDashboard.putData(m_gyro);
         SmartDashboard.putData(m_robotDrive);
         SmartDashboard.putData(m_field);
 
 
         //TODO: Fix this
         SmartDashboard.putData("Reset Gyro", new InstantCommand(() -> {
-            //m_gyro.reset();
+            m_gyro.reset();
             System.out.println("reset");
         }));
     }
@@ -70,20 +72,20 @@ public class MechanumDrive extends SubsystemBase {
         m_robotDrive.driveCartesian(xSpeed, ySpeed, rotSpeed);
     }
 
-   // private double currXSpeed = 0;
-    //private double currYSpeed = 0;
+    private double currXSpeed = 0;
+    private double currYSpeed = 0;
 
-    //public void driveCartesianFieldRelative(double xSpeed, double ySpeed, double rotSpeed) {
-    //    Rotation2d rot = getRotation();
-    //    m_robotDrive.driveCartesian(xSpeed, ySpeed, rotSpeed, rot);
-    //
-    //    currXSpeed = Math.max(Math.min(xSpeed, 1), -1);
-    //    currYSpeed = Math.max(Math.min(ySpeed, 1), -1);
-    //}
+    public void driveCartesianFieldRelative(double xSpeed, double ySpeed, double rotSpeed) {
+        Rotation2d rot = getRotation();
+        m_robotDrive.driveCartesian(xSpeed, ySpeed, rotSpeed, rot);
+    
+        currXSpeed = Math.max(Math.min(xSpeed, 1), -1);
+        currYSpeed = Math.max(Math.min(ySpeed, 1), -1);
+    }
 
-    //public Rotation2d getRotation() {
-        //return Rotation2d.fromDegrees(m_gyro.getYaw());
-    //}
+    public Rotation2d getRotation() {
+        return Rotation2d.fromDegrees(m_gyro.getYaw());
+    }
 
     public void setPose(Pose2d pose) {
         m_poseEstimate = pose;
@@ -98,19 +100,19 @@ public class MechanumDrive extends SubsystemBase {
         m_field.setRobotPose(m_poseEstimate);
     }
 
-    //@Override
-    //public void simulationPeriodic() {
-    //    int dev = SimDeviceDataJNI.getSimDeviceHandle("navX-Sensor[4]");
-    //    SimDouble gyroSimAngle = new SimDouble(SimDeviceDataJNI.getSimValueHandle(dev, "Yaw"));
-    //    gyroSimAngle.set(m_poseEstimate.getRotation().getDegrees());
-    //}
+    @Override
+    public void simulationPeriodic() {
+        int dev = SimDeviceDataJNI.getSimDeviceHandle("navX-Sensor[4]");
+        SimDouble gyroSimAngle = new SimDouble(SimDeviceDataJNI.getSimValueHandle(dev, "Yaw"));
+        gyroSimAngle.set(m_poseEstimate.getRotation().getDegrees());
+    }
 
     public Pose2d getPose() {
         return m_poseEstimate;
     }
 
     public void reset() {
-        //currXSpeed = 0;
-        //currYSpeed = 0;
+        currXSpeed = 0;
+        currYSpeed = 0;
     }
 }

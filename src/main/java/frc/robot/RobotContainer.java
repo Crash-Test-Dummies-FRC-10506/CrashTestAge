@@ -47,9 +47,9 @@ public class RobotContainer {
     m_drive.driveCartesian(-m_driverController.getLeftY() * drivepower, m_driverController.getLeftX() * drivepower, m_driverController.getRightX() * drivepower);
   }
 
-  //public void simulationDrive() {
-  //  m_drive.driveCartesianFieldRelative(-m_driverController.getLeftY(), -m_driverController.getLeftX(), -m_driverController.getRightX());
-  //}
+  public void simulationDrive() {
+    m_drive.driveCartesianFieldRelative(-m_driverController.getLeftY(), -m_driverController.getLeftX(), -m_driverController.getRightX());
+  }
 
   public void reset() {
     m_drive.reset();

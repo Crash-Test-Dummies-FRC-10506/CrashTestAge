@@ -49,8 +49,7 @@ public class DriveToPoint extends Command {
         if(angle > 180) angle = 360 - angle;
         double anglePow = headingController.calculate(currPose.getRotation().getDegrees(), angle);
     
-        //m_drive.driveCartesianFieldRelative(xSpeed * speed, ySpeed * speed, anglePow * speed);
-        m_drive.driveCartesian(xSpeed * speed, ySpeed * speed, anglePow * speed);
+        m_drive.driveCartesianFieldRelative(xSpeed * speed, ySpeed * speed, anglePow * speed);
     }
 
     @Override
@@ -62,7 +61,6 @@ public class DriveToPoint extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        //m_drive.driveCartesianFieldRelative(0, 0, 0);
-        m_drive.driveCartesian(0, 0, 0);
+        m_drive.driveCartesianFieldRelative(0, 0, 0);
     }
 }
