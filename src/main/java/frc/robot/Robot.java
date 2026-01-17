@@ -57,6 +57,8 @@ public class Robot extends TimedRobot {
           m_robotContainer.m_drive.setPose(Constants.AutoConstants.redMiddle);
         } else if (DriverStation.getRawAllianceStation() == AllianceStationID.Red3) {
           m_robotContainer.m_drive.setPose(Constants.AutoConstants.redRight);
+        } else {
+          m_robotContainer.m_drive.setPose(Constants.AutoConstants.redMiddle);
         }
       } else if (DriverStation.getAlliance().get() == Alliance.Blue) {
         if (DriverStation.getRawAllianceStation() == AllianceStationID.Blue1) {
@@ -65,6 +67,8 @@ public class Robot extends TimedRobot {
           m_robotContainer.m_drive.setPose(Constants.AutoConstants.blueMiddle);
         } else if (DriverStation.getRawAllianceStation() == AllianceStationID.Blue3) {
           m_robotContainer.m_drive.setPose(Constants.AutoConstants.blueRight);
+        } else {
+          m_robotContainer.m_drive.setPose(Constants.AutoConstants.blueMiddle);
         }
       } else { // usually returns invalid
         m_robotContainer.m_drive.setPose(Constants.AutoConstants.redMiddle);
