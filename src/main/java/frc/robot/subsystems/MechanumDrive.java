@@ -77,10 +77,11 @@ public class MechanumDrive extends SubsystemBase {
 
     public void driveCartesianFieldRelative(double xSpeed, double ySpeed, double rotSpeed) {
         Rotation2d rot = getRotation();
-        m_robotDrive.driveCartesian(xSpeed, ySpeed, rotSpeed, rot);
-    
+
         currXSpeed = Math.max(Math.min(xSpeed, 1), -1);
         currYSpeed = Math.max(Math.min(ySpeed, 1), -1);
+        
+        m_robotDrive.driveCartesian(currXSpeed, currYSpeed, rotSpeed, rot);
     }
 
     public Rotation2d getRotation() {
