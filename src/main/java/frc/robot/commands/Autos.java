@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 public final class Autos {
   /** Example static factory for an autonomous command. */
   public static Command mainAuto(RobotContainer bot) {
-    return Commands.sequence(new DriveToPoint(bot.m_drive, new Pose2d(0, -1, new Rotation2d(0)), 0.3));
+    return Commands.sequence(new DriveToPoint(bot.m_drive, new Pose2d(14.796, 4.033, new Rotation2d(0)), 0.3));
   }
 
   private Autos() {

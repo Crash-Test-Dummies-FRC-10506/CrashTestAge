@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.hal.AllianceStationID;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
 
@@ -49,10 +50,25 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {
     if(DriverStation.getAlliance().isPresent()) {
-      m_robotContainer.m_drive.setPose(DriverStation.getAlliance().get() == Alliance.Red ? 
-        Constants.AutoConstants.redMiddle :
-        Constants.AutoConstants.blueMiddle
-      );
+      if (DriverStation.getAlliance().get() == Alliance.Red) { // I'm sorry if this format is downgrade but for specific side this is kinda needed
+        if (DriverStation.getRawAllianceStation() == AllianceStationID.Red1) {
+          m_robotContainer.m_drive.setPose(Constants.AutoConstants.redLeft);
+        } else if (DriverStation.getRawAllianceStation() == AllianceStationID.Red2) {
+          m_robotContainer.m_drive.setPose(Constants.AutoConstants.redMiddle);
+        } else if (DriverStation.getRawAllianceStation() == AllianceStationID.Red3) {
+          m_robotContainer.m_drive.setPose(Constants.AutoConstants.redRight);
+        }
+      } else if (DriverStation.getAlliance().get() == Alliance.Blue) {
+        if (DriverStation.getRawAllianceStation() == AllianceStationID.Blue1) {
+          m_robotContainer.m_drive.setPose(Constants.AutoConstants.blueLeft);
+        } else if (DriverStation.getRawAllianceStation() == AllianceStationID.Blue2) {
+          m_robotContainer.m_drive.setPose(Constants.AutoConstants.blueMiddle);
+        } else if (DriverStation.getRawAllianceStation() == AllianceStationID.Blue3) {
+          m_robotContainer.m_drive.setPose(Constants.AutoConstants.blueRight);
+        }
+      } else { // usually returns invalid
+        m_robotContainer.m_drive.setPose(Constants.AutoConstants.redMiddle);
+      }
     }
   }
 
