@@ -31,8 +31,8 @@ public final class Constants {
   }
 
   public static class AutoConstants {
-    public static final Pose2d redMiddle = new Pose2d(0, 0, new Rotation2d(0));
-    public static final Pose2d blueMiddle = new Pose2d(Math.PI, Math.PI, new Rotation2d(Math.PI));
+    public static final Pose2d redMiddle = new Pose2d(13.086, 3.996, new Rotation2d(0));
+    public static final Pose2d blueMiddle = new Pose2d(3.457, 4.015, new Rotation2d(0));
   }
 
   public static class AprilTagConstants {
