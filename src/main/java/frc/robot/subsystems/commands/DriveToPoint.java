@@ -33,8 +33,8 @@ public class DriveToPoint extends Command {
         SmartDashboard.putData("X PID", xController);
         SmartDashboard.putData("Y PID", yController);
         SmartDashboard.putData("Heading PID", headingController);
-        SmartDashboard.putNumber("X and Y Error Tolerance (Inches to Meters)", xyerrorTolerance);
-        SmartDashboard.putNumber("Heading Error Tolerance (Degrees)", headingerrorTolerance);
+        SmartDashboard.putNumber("X and Y Error Tolerance", xyerrorTolerance);
+        SmartDashboard.putNumber("Heading Error Tolerance", headingerrorTolerance);
         SmartDashboard.putNumber("Auto Driving Speed", speed);
     }
 
@@ -63,4 +63,5 @@ public class DriveToPoint extends Command {
     public void end(boolean interrupted) {
         m_drive.driveCartesianFieldRelative(0, 0, 0);
     }
+
 }
