@@ -63,5 +63,4 @@ public class DriveToPoint extends Command {
     public void end(boolean interrupted) {
         m_drive.driveCartesianFieldRelative(0, 0, 0);
     }
-
 }

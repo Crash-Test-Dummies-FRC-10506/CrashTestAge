@@ -6,8 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
-import frc.robot.Constants.HardwareConstants;
-import frc.robot.Constants.AprilTagConstants;
+import frc.robot.Constants.CameraConstants;
 
 public class Photon extends SubsystemBase {
     PhotonPipelineResult result;
@@ -15,7 +14,7 @@ public class Photon extends SubsystemBase {
     PhotonTrackedTarget target;
     double yaw = 0.0;
     public Photon() {
-        camera = new PhotonCamera(HardwareConstants.kLimelightName);
+        camera = new PhotonCamera(CameraConstants.kLimelightName);
     }
 
     @Override
@@ -23,7 +22,7 @@ public class Photon extends SubsystemBase {
         if (camera.getLatestResult().hasTargets()) {
             for (PhotonTrackedTarget target : result.targets) {
                 this.target = target;
-                if (target.fiducialId == AprilTagConstants.red) {
+                if (target.fiducialId == 16) {
                     yaw = target.getYaw();
                 } else {
                     DriverStation.reportWarning("Couldn't get any specific april tags", false);

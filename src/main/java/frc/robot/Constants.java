@@ -21,13 +21,11 @@ public final class Constants {
     public static final int kShooterControllerPort = 1;
   }
 
-  public static class HardwareConstants {
+  public static class DrivetrainConstants {
     public static final int kFrontLeftMotorID = 5;
     public static final int kRearLeftMotorID = 4;
     public static final int kFrontRightMotorID = 3;
     public static final int kRearRightMotorID = 2;
-
-    public static final String kLimelightName = "limelight-crash";
   }
 
   public static class AutoConstants { // all trials and errors so don't rely on this too much
@@ -39,7 +37,7 @@ public final class Constants {
     public static final Pose2d blueRight = new Pose2d(3.457, 7.584, new Rotation2d(0));
   }
 
-  public static class AprilTagConstants {
-    public static final int red = 1;
+  public static class CameraConstants {
+    public static final String kLimelightName = "limelight-crash";
   }
 }

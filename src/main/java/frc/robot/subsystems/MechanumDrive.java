@@ -8,7 +8,7 @@ import com.revrobotics.PersistMode;
 import com.studica.frc.AHRS;
 import com.studica.frc.AHRS.NavXComType;
 
-import frc.robot.Constants.HardwareConstants;
+import frc.robot.Constants.DrivetrainConstants;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
@@ -36,10 +36,10 @@ public class MechanumDrive extends SubsystemBase {
     public MechanumDrive() {
         m_gyro.reset();
 
-        m_frontLeft = new SparkMax(HardwareConstants.kFrontLeftMotorID, MotorType.kBrushed);
-        m_rearLeft = new SparkMax(HardwareConstants.kRearLeftMotorID, MotorType.kBrushed);
-        m_frontRight = new SparkMax(HardwareConstants.kFrontRightMotorID, MotorType.kBrushed);
-        m_rearRight = new SparkMax(HardwareConstants.kRearRightMotorID, MotorType.kBrushed);
+        m_frontLeft = new SparkMax(DrivetrainConstants.kFrontLeftMotorID, MotorType.kBrushed);
+        m_rearLeft = new SparkMax(DrivetrainConstants.kRearLeftMotorID, MotorType.kBrushed);
+        m_frontRight = new SparkMax(DrivetrainConstants.kFrontRightMotorID, MotorType.kBrushed);
+        m_rearRight = new SparkMax(DrivetrainConstants.kRearRightMotorID, MotorType.kBrushed);
 
         SparkMaxConfig inverted = new SparkMaxConfig();
         inverted.idleMode(IdleMode.kBrake);
