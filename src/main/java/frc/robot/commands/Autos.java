@@ -9,13 +9,16 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.commands.DriveToPoint;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
 public final class Autos {
   /** Example static factory for an autonomous command. */
   public static Command mainAuto(RobotContainer bot) {
-    return Commands.sequence(new DriveToPoint(bot.m_drive, new Pose2d(14.796, 4.033, new Rotation2d(0)), 0.3));
+    return Commands.sequence(
+      new DriveToPoint(bot.m_drive, new Pose2d(14.796, 4.033, new Rotation2d(0)), Units.inchesToMeters(2), 0.3)
+    );
   }
 
   private Autos() {

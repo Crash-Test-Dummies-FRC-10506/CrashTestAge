@@ -12,28 +12,30 @@ public class DriveToPoint extends Command {
     private final MechanumDrive m_drive;
     private final Pose2d target;
     private final double speed;
+    private final double distanceTolerance;
 
     private final PIDController xController = new PIDController(0.045, 0, 0);
     private final PIDController yController = new PIDController(0.045, 0, 0);
     private final PIDController headingController = new PIDController(0.045, 0, 0);
-    private final double xyerrorTolerance = Units.inchesToMeters(2);
-    private final double headingerrorTolerance = Math.toDegrees(90); // I could be wrong
+    //private final double xyerrorTolerance = Units.inchesToMeters(2);
+    private final double headingerrorTolerance = 0.005;
 
-    public DriveToPoint(MechanumDrive drive, Pose2d point, double movespeed) {
+    public DriveToPoint(MechanumDrive drive, Pose2d point, double disttolerance, double movespeed) {
         m_drive = drive;
         target = point;
         speed = movespeed;
+        distanceTolerance = disttolerance;
 
         headingController.enableContinuousInput(-Math.PI, Math.PI);
 
-        xController.setTolerance(xyerrorTolerance);
-        yController.setTolerance(xyerrorTolerance);
+        xController.setTolerance(distanceTolerance);
+        yController.setTolerance(distanceTolerance);
         headingController.setTolerance(headingerrorTolerance);
 
         SmartDashboard.putData("X PID", xController);
         SmartDashboard.putData("Y PID", yController);
         SmartDashboard.putData("Heading PID", headingController);
-        SmartDashboard.putNumber("X and Y Error Tolerance", xyerrorTolerance);
+        SmartDashboard.putNumber("X and Y Error Tolerance", disttolerance);
         SmartDashboard.putNumber("Heading Error Tolerance", headingerrorTolerance);
         SmartDashboard.putNumber("Auto Driving Speed", speed);
     }
