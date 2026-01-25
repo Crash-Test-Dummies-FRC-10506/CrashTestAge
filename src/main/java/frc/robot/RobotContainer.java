@@ -11,17 +11,27 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.commands.PowerIntake;
 
 
 public class RobotContainer {
   public final MechanumDrive m_drive = new MechanumDrive();
+  public final Intake m_intake = new Intake();
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<>();
 
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final CommandXboxController m_shooterController =
+      new CommandXboxController(OperatorConstants.kShooterControllerPort);
 
   public RobotContainer() {
     configureAutos();
+    configureBindings();
+  }
+
+  private void configureBindings() {
+    m_shooterController.a().onTrue(new PowerIntake(m_intake, 1));
   }
 
   private void configureAutos() {

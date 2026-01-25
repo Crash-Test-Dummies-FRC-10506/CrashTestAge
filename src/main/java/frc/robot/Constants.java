@@ -29,7 +29,7 @@ public final class Constants {
   }
 
   public static class IntakeConstants {
-    public static final int kIntakeMotorId = 6;
+    public static final int kIntakeMotorID = 6;
   }
 
   public static class AutoConstants { // all trials and errors so don't rely on this too much
