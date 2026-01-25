@@ -43,6 +43,7 @@ public class Shooter extends SubsystemBase {
 
     public void shoot() {
         // set the motorPower
+        // make sure the motor is up to speed (respective of kMaxPowerError)
         // and release the ball into the flywheels
         // then reset power to 0 once shooting trigger is released
     }
