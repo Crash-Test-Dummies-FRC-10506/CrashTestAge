@@ -26,6 +26,8 @@ public final class Constants {
     public static final int kRearLeftMotorID = 4;
     public static final int kFrontRightMotorID = 3;
     public static final int kRearRightMotorID = 2;
+
+    public static final double kMechanumPower = 0.668;
   }
 
   public static class IntakeConstants {
