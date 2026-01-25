@@ -106,9 +106,10 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     // Calculate drivetrain commands from Joystick values
-    double forward = -controller.getLeftY()  * 0.668;
-    double strafe  = -controller.getLeftX()  * 0.668;
-    double turn    = -controller.getRightX() * 0.668;
+    double pwr = Constants.Drivetrain.kMechanumPower;
+    double forward = -controller.getLeftY()  * pwr;
+    double strafe  = -controller.getLeftX()  * pwr;
+    double turn    = -controller.getRightX() * pwr;
 
     // Read in relevant data from the Camera
     boolean targetVisible = false;
@@ -135,7 +136,7 @@ public class Robot extends TimedRobot {
       // Driver wants auto-alignment to tag 7
       // And, tag 7 is in sight, so we can turn toward it.
       // Override the driver's turn command with an automatic one that turns toward the tag.
-      turn = -1.0 * targetYaw * VISION_TURN_kP * 0.668;
+      turn = -1.0 * targetYaw * VISION_TURN_kP * pwr;
     }
 
     // Command drivetrain motors based on target speeds
