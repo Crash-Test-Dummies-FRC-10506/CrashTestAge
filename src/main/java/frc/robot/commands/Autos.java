@@ -17,7 +17,7 @@ public final class Autos {
   /** Example static factory for an autonomous command. */
   public static Command mainAuto(RobotContainer bot) {
     return Commands.sequence(
-      new DriveToPoint(bot.m_drive, new Pose2d(14.796, 4.033, new Rotation2d(0)), Units.inchesToMeters(2), 0.45)
+      new DriveToPoint(bot.m_drive, new Pose2d(14.796, 4.033, new Rotation2d(0)), Units.inchesToMeters(1), 0.45)
     );
   }
 

@@ -32,6 +32,10 @@ public final class Constants {
     public static final int kIntakeMotorID = 6;
   }
 
+  public static class ShooterConstants {
+    public static final int kShooterMotorID = 7;
+  }
+
   public static class AutoConstants { // all trials and errors so don't rely on this too much
     public static final Pose2d redLeft = new Pose2d(13.086, 0.539, new Rotation2d(0));
     public static final Pose2d redMiddle = new Pose2d(13.086, 3.998, new Rotation2d(0));
