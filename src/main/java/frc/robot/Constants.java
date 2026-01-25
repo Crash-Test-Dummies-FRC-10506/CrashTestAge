@@ -34,6 +34,8 @@ public final class Constants {
 
   public static class ShooterConstants {
     public static final int kShooterMotorID = 7;
+    public static final double kFeedForward = 0.5; // needs tuning
+    public static final double kPID_Proportional = 0.5; // needs tuning
   }
 
   public static class AutoConstants { // all trials and errors so don't rely on this too much
