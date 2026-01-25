@@ -16,88 +16,61 @@ public class Shooter extends SubsystemBase {
     private TrapezoidProfile.State m_goal = new State();
     private TrapezoidProfile.State m_setpoint = new State();
     
-    private PIDController pidConstants = new PIDController(???, 0.0, 0.0);
+    private PIDController pidConstants = new PIDController(kPID_Proportional, 0.0, 0.0);
 
-    private double ff = 0.77; // Feedforward
-
-    private double motorPower = 0;
+    private double m_motorPower = 0;
 
     public Shooter() {
-        m_config.closedLoop.pid(???, 0, 0);
-        m_config.inverted(true);
+        m_config.closedLoop.pid(kPID_Proportional, 0.0, 0.0);
+        m_config.inverted(true); //
         m_config.idleMode(IdleMode.kBrake);
         m_config.smartCurrentLimit(???);
 
         m_elevMotor.configure(m_config, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
         SmartDashboard.putData("Shooter PID", pidConstants);
-        
-        SmartDashboard.putNumber("Shooter Feedforward", ff);
     }
 
     public void shoot() {
-        // Set the motorPower
+        // set the motorPower
         // and release the ball into the flywheels
+        // then reset power to 0 once shooting trigger is released
     }
 
-    public void setReference(double val, ControlType type, double ff) {
-        m_elevMotor.getClosedLoopController().setReference(val, type, ClosedLoopSlot.kSlot0, ff);
+    public void setReference(double val, ControlType type) {
+        m_motor.getClosedLoopController().setReference(val, type, ClosedLoopSlot.kSlot0, 0.0);
     }
 
     @Override
     public void periodic() {
-        ff = SmartDashboard.getNumber("Elevator Feedforward", 0.7);
+        m_setpower = m_profile.calculate(0.02 ???, m_setpower, m_goal);
 
-        m_setpoint = m_profile.calculate(0.02, m_setpoint, m_goal);
-
-        setReference(m_setpoint.position, ControlType.kPosition, ff);
+        setReference(m_setpoint.position, ControlType.kPosition);
         
-        SmartDashboard.putNumber("Target Elevator Position", m_setpoint.position);
-        SmartDashboard.putNumber("Actual Elevator Position", m_elevMotor.getEncoder().getPosition());
-        SmartDashboard.putNumber("NEO Power", m_elevMotor.get());
-
-        AutoConstants.elevatorHeights = SmartDashboard.getNumberArray("Elevator Heights", new double[] {0, 0, 0, 0});
+        SmartDashboard.putNumber("Target Shooter Power", m_setpower.position);
+        SmartDashboard.putNumber("Actual Shooter Power", m_motor.getEncoder().getPosition());
+        SmartDashboard.putNumber("NEO Power", m_motor.get());
         
         m_config.closedLoop.pid(pidConstants.getP(), pidConstants.getI(), pidConstants.getD());
         m_elevMotor.configure(m_config, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
     }
 
-    private void setState(int pos) {
-        m_goal = new TrapezoidProfile.State(AutoConstants.elevatorHeights[pos], 0);
-    }
-
-    public Command setGoal(int pos) {
+    public Command setGoal(int pwr) {
         return runOnce(() -> {
-            elevHeight = pos;
+            m_motorPower = pwr;
             setState(pos);
         });
-    }
+    }}
 
-    public Command down() {
+    public Command setPower(double pwr) {
         return runOnce(() -> {
-            elevHeight--;
-            if(elevHeight < 0) elevHeight = 0;
-            setState(elevHeight);
-        });
-    }
-
-    public Command up() {
-        return runOnce(() -> {
-            elevHeight++;
-            if(elevHeight > 3) elevHeight = 3;
-            setState(elevHeight);
-        });
-    }
-
-    public Command setPos(double pos) {
-        return runOnce(() -> {
-            m_goal = new TrapezoidProfile.State(pos, 0);
+            m_goal = new TrapezoidProfile.State(pwr, 0.0);
         });
     }
 
     public void reset() {
-        elevHeight = 0;
+        m_motorPowe = 0.0;
         
-        m_goal = new TrapezoidProfile.State(0, 0);
-        m_setpoint = new TrapezoidProfile.State(0, 0);
+        m_goal     = new TrapezoidProfile.State(0.0, 0.0);
+        m_setpower = new TrapezoidProfile.State(0.0, 0.0);
     }
 }
