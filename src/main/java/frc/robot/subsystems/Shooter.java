@@ -1,32 +1,43 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.spark.config.SparkMaxConfig;
+import com.revrobotics.PersistMode;
+import com.revrobotics.ResetMode;
+import com.revrobotics.spark.ClosedLoopSlot;
+import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.trajectory.TrapezoidProfile.Constraints;
+import edu.wpi.first.math.trajectory.TrapezoidProfile.State;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
 public class Shooter extends SubsystemBase {
 
-    SparkMax m_motor = new SparkMax(ShooterConstants.kShooterMotorID, MotorType.kBrushed);
+    SparkMax m_Shootermotor = new SparkMax(ShooterConstants.kShooterMotorID, MotorType.kBrushed);
     private SparkMaxConfig m_config = new SparkMaxConfig();
 
-    private TrapezoidProfile m_profile = new TrapezoidProfile(new Constraints(???, ???));
+    private TrapezoidProfile m_profile = new TrapezoidProfile(new Constraints(ShooterConstants.kMaxVelocity, ShooterConstants.kMaxAccelrate));
     private TrapezoidProfile.State m_goal = new State();
     private TrapezoidProfile.State m_setpoint = new State();
     
-    private PIDController pidConstants = new PIDController(kPID_Proportional, 0.0, 0.0);
+    private PIDController pidConstants = new PIDController(ShooterConstants.kPID_Proportional, 0.0, 0.0);
 
     private double m_motorPower = 0;
 
     public Shooter() {
-        m_config.closedLoop.pid(kPID_Proportional, 0.0, 0.0);
+        m_config.closedLoop.pid(ShooterConstants.kPID_Proportional, 0.0, 0.0);
         m_config.inverted(true); //
         m_config.idleMode(IdleMode.kBrake);
-        m_config.smartCurrentLimit(???);
+        m_config.smartCurrentLimit(90);
 
-        m_elevMotor.configure(m_config, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
+        m_Shootermotor.configure(m_config, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
         SmartDashboard.putData("Shooter PID", pidConstants);
     }
 
@@ -37,40 +48,20 @@ public class Shooter extends SubsystemBase {
     }
 
     public void setReference(double val, ControlType type) {
-        m_motor.getClosedLoopController().setReference(val, type, ClosedLoopSlot.kSlot0, 0.0);
+        m_Shootermotor.getClosedLoopController().setReference(val, type, ClosedLoopSlot.kSlot0, 0.0);
     }
 
     @Override
     public void periodic() {
-        m_setpower = m_profile.calculate(0.02 ???, m_setpower, m_goal);
-
         setReference(m_setpoint.position, ControlType.kPosition);
-        
-        SmartDashboard.putNumber("Target Shooter Power", m_setpower.position);
-        SmartDashboard.putNumber("Actual Shooter Power", m_motor.getEncoder().getPosition());
-        SmartDashboard.putNumber("NEO Power", m_motor.get());
+        SmartDashboard.putNumber("NEO Power", m_Shootermotor.get());
         
         m_config.closedLoop.pid(pidConstants.getP(), pidConstants.getI(), pidConstants.getD());
-        m_elevMotor.configure(m_config, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
+        m_Shootermotor.configure(m_config, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
     }
 
-    public Command setGoal(int pwr) {
-        return runOnce(() -> {
-            m_motorPower = pwr;
-            setState(pos);
-        });
-    }}
-
-    public Command setPower(double pwr) {
-        return runOnce(() -> {
-            m_goal = new TrapezoidProfile.State(pwr, 0.0);
-        });
-    }
-
-    public void reset() {
-        m_motorPowe = 0.0;
-        
-        m_goal     = new TrapezoidProfile.State(0.0, 0.0);
-        m_setpower = new TrapezoidProfile.State(0.0, 0.0);
+    public void setPower(int pwr) {
+        m_Shootermotor.set(pwr);
     }
 }
+    
