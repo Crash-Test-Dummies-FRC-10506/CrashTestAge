@@ -38,15 +38,16 @@ public final class Constants {
     public static final int kShooterMotorID = 7;
     public static final double kFeedForward = 0.5; // needs tuning
     public static final double kPID_Proportional = 0.5; // needs tuning
+    public static final double kMaxPowerError = 0.5; // needs tuning
   }
 
   public static class AutoConstants { // all trials and errors so don't rely on this too much
-    public static final Pose2d redLeft = new Pose2d(13.086, 0.539, new Rotation2d(0));
-    public static final Pose2d redMiddle = new Pose2d(13.086, 3.998, new Rotation2d(0));
-    public static final Pose2d redRight = new Pose2d(13.086, 7.584, new Rotation2d(0));
-    public static final Pose2d blueLeft = new Pose2d(3.457, 0.539, new Rotation2d(0));
-    public static final Pose2d blueMiddle = new Pose2d(3.457, 3.998, new Rotation2d(0));
-    public static final Pose2d blueRight = new Pose2d(3.457, 7.584, new Rotation2d(0));
+    public static final Pose2d redLeft    = new Pose2d(13.086, 0.539, new Rotation2d(0));
+    public static final Pose2d redMiddle  = new Pose2d(13.086, 3.998, new Rotation2d(0));
+    public static final Pose2d redRight   = new Pose2d(13.086, 7.584, new Rotation2d(0));
+    public static final Pose2d blueLeft   = new Pose2d(3.457,  0.539, new Rotation2d(0));
+    public static final Pose2d blueMiddle = new Pose2d(3.457,  3.998, new Rotation2d(0));
+    public static final Pose2d blueRight  = new Pose2d(3.457,  7.584, new Rotation2d(0));
   }
 
   public static class CameraConstants {
