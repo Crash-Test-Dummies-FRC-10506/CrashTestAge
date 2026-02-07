@@ -6,6 +6,8 @@ package frc.robot;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -34,10 +36,23 @@ public final class Constants {
 
   public static class ShooterConstants {
     public static final int kShooterMotorID = 7;
-    public static final int kMaxVelocity = 0;
-    public static final int kMaxAccelrate = 0;
-    public static double kFeedForward = 0.1; // needs tuning
-    public static final double kPID_Proportional = 0.05; // needs tuning
+
+    public static TalonFXConfiguration GetShooterConstants() {
+      TalonFXConfiguration config = new TalonFXConfiguration();
+
+      config.Slot0.kP = 0.1;
+      config.Slot0.kI = 0.001;
+      config.Slot0.kD = 0.000001;
+
+      config.Slot0.kV = 0.01; // since we're using kraken x60, the rpm is 6000 I think, so if we convert it to rps by 6000 rpm × 0.01667 = 100 rps 1 / 100 = 0.01
+
+      config.MotionMagic.MotionMagicAcceleration = 260;
+      config.MotionMagic.MotionMagicJerk = 2600;
+
+      config.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+
+      return config;
+    }
   }
 
   public static class AutoConstants { // all trials and errors so don't rely on this too much
@@ -51,5 +66,6 @@ public final class Constants {
 
   public static class CameraConstants {
     public static final String kLimelightName = "limelight-crash";
+    public static final double kAutoAlignPower = 0.668;
   }
 }

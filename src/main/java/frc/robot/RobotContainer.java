@@ -7,17 +7,21 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.subsystems.MechanumDrive;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.commands.PowerIntake;
+import frc.robot.subsystems.commands.PowerShooter;
+import frc.robot.subsystems.commands.PowerShooterMotionMagic;
 
 
 public class RobotContainer {
   public final MechanumDrive m_drive = new MechanumDrive();
   public final Intake m_intake = new Intake();
+  public final Shooter m_shooter = new Shooter();
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<>();
 
   private final CommandXboxController m_driverController =
@@ -32,6 +36,8 @@ public class RobotContainer {
 
   private void configureBindings() {
     m_shooterController.a().onTrue(new PowerIntake(m_intake, 1));
+    m_shooterController.b().onTrue(new PowerShooter(m_shooter, 0.9));
+    m_shooterController.y().onTrue(new PowerShooterMotionMagic(m_shooter, 75));
   }
 
   private void configureAutos() {
