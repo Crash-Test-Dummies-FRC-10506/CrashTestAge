@@ -1,4 +1,4 @@
-package framework.src.main.java.org.frc1410.framework.scheduler.task.lock;
+package framework.src.main.java.org.frc10506.framework.scheduler.task.lock;
 
 import java.util.Set;
 

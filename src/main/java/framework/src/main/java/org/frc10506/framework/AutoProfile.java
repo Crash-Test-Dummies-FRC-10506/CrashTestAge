@@ -1,4 +1,4 @@
-package framework.src.main.java.org.frc1410.framework;
+package framework.src.main.java.org.frc10506.framework;
 
 import edu.wpi.first.wpilibj2.command.Command;
 

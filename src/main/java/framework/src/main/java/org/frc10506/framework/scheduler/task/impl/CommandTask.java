@@ -1,8 +1,8 @@
-package framework.src.main.java.org.frc1410.framework.scheduler.task.impl;
+package framework.src.main.java.org.frc10506.framework.scheduler.task.impl;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.Task;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.Task;
 
 import java.util.Objects;
 import java.util.Set;

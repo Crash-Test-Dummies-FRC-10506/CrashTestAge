@@ -1,14 +1,14 @@
-package framework.src.main.java.org.frc1410.framework.control;
+package framework.src.main.java.org.frc10506.framework.control;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import framework.src.main.java.org.frc1410.framework.control.observer.WhenPressedObserver;
-import framework.src.main.java.org.frc1410.framework.control.observer.WhileHeldObserver;
-import framework.src.main.java.org.frc1410.framework.control.observer.WhileHeldOnceObserver;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.Task;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.TaskPersistence;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.TaskScheduler;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.impl.CommandTask;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.lock.LockPriority;
+import framework.src.main.java.org.frc10506.framework.control.observer.WhenPressedObserver;
+import framework.src.main.java.org.frc10506.framework.control.observer.WhileHeldObserver;
+import framework.src.main.java.org.frc10506.framework.control.observer.WhileHeldOnceObserver;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.Task;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.TaskPersistence;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.TaskScheduler;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.impl.CommandTask;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.lock.LockPriority;
 
 public interface Button {
 

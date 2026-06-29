@@ -1,15 +1,15 @@
-package framework.src.main.java.org.frc1410.framework;
+package framework.src.main.java.org.frc10506.framework;
 
 import edu.wpi.first.net.WebServer;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.TimedRobot;
-import framework.src.main.java.org.frc1410.framework.phase.Phase;
-import framework.src.main.java.org.frc1410.framework.phase.PhaseController;
-import framework.src.main.java.org.frc1410.framework.scheduler.loop.Loop;
-import framework.src.main.java.org.frc1410.framework.scheduler.subsystem.SubsystemStore;
-import framework.src.main.java.org.frc1410.framework.scheduler.subsystem.TickedSubsystem;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.TaskScheduler;
-import framework.src.main.java.org.frc1410.framework.util.log.Logger;
+import framework.src.main.java.org.frc10506.framework.phase.Phase;
+import framework.src.main.java.org.frc10506.framework.phase.PhaseController;
+import framework.src.main.java.org.frc10506.framework.scheduler.loop.Loop;
+import framework.src.main.java.org.frc10506.framework.scheduler.subsystem.SubsystemStore;
+import framework.src.main.java.org.frc10506.framework.scheduler.subsystem.TickedSubsystem;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.TaskScheduler;
+import framework.src.main.java.org.frc10506.framework.util.log.Logger;
 
 /**
  * The base robot type that all robots can extend to access the scheduling

@@ -1,12 +1,12 @@
-package framework.src.main.java.org.frc1410.framework.scheduler.subsystem;
+package framework.src.main.java.org.frc10506.framework.scheduler.subsystem;
 
 import edu.wpi.first.wpilibj2.command.Subsystem;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.TaskPersistence;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.TaskScheduler;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.impl.SubsystemPeriodicTask;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.lock.LockPriority;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.Observer;
-import framework.src.main.java.org.frc1410.framework.util.log.Logger;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.Observer;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.TaskPersistence;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.TaskScheduler;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.impl.SubsystemPeriodicTask;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.lock.LockPriority;
+import framework.src.main.java.org.frc10506.framework.util.log.Logger;
 
 import java.util.Objects;
 

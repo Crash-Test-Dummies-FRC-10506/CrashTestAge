@@ -1,13 +1,13 @@
-package framework.src.main.java.org.frc1410.framework.scheduler.loop;
-
-import framework.src.main.java.org.frc1410.framework.phase.Phase;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.BoundTask;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.TaskScheduler;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.TaskState;
+package framework.src.main.java.org.frc10506.framework.scheduler.loop;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+
+import framework.src.main.java.org.frc10506.framework.phase.Phase;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.BoundTask;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.TaskScheduler;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.TaskState;
 
 /**
  * Loops hold bound tasks, and are ticked on their period. There is

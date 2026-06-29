@@ -1,10 +1,10 @@
-package framework.src.main.java.org.frc1410.framework.scheduler.task.lock;
-
-import framework.src.main.java.org.frc1410.framework.scheduler.task.BoundTask;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.TaskScheduler;
+package framework.src.main.java.org.frc10506.framework.scheduler.task.lock;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import framework.src.main.java.org.frc10506.framework.scheduler.task.BoundTask;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.TaskScheduler;
 
 /**
  * This class is responsible for the storage and monitoring of locks. The

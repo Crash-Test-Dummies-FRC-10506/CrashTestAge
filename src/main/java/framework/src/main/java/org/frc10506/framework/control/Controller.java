@@ -1,9 +1,9 @@
-package framework.src.main.java.org.frc1410.framework.control;
+package framework.src.main.java.org.frc10506.framework.control;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.*;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.lock.LockPriority;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.*;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.lock.LockPriority;
 
 import static edu.wpi.first.wpilibj.XboxController.Axis.*;
 import static edu.wpi.first.wpilibj.XboxController.Button.*;

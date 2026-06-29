@@ -1,4 +1,4 @@
-package framework.src.main.java.org.frc1410.framework.scheduler.task;
+package framework.src.main.java.org.frc10506.framework.scheduler.task;
 
 /**
  * This interface is responsible for linking tasks to external conditions such

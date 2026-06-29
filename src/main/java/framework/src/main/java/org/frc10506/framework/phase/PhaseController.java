@@ -1,8 +1,8 @@
-package framework.src.main.java.org.frc1410.framework.phase;
+package framework.src.main.java.org.frc10506.framework.phase;
 
-import framework.src.main.java.org.frc1410.framework.PhaseDrivenRobot;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.TaskScheduler;
-import framework.src.main.java.org.frc1410.framework.util.log.Logger;
+import framework.src.main.java.org.frc10506.framework.PhaseDrivenRobot;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.TaskScheduler;
+import framework.src.main.java.org.frc10506.framework.util.log.Logger;
 
 /**
  * A state machine responsible for controlling robot phase. This class is used in

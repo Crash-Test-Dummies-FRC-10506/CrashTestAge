@@ -1,4 +1,4 @@
-package framework.src.main.java.org.frc1410.framework.scheduler.subsystem;
+package framework.src.main.java.org.frc10506.framework.scheduler.subsystem;
 
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import java.util.ArrayList;

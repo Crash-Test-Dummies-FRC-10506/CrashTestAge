@@ -1,8 +1,8 @@
-package framework.src.main.java.org.frc1410.framework;
+package framework.src.main.java.org.frc10506.framework;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import framework.src.main.java.org.frc1410.framework.util.log.Logger;
+import framework.src.main.java.org.frc10506.framework.util.log.Logger;
 
 import java.util.ArrayList;
 import java.util.List;

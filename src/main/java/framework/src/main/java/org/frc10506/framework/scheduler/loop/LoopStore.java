@@ -1,9 +1,10 @@
-package framework.src.main.java.org.frc1410.framework.scheduler.loop;
+package framework.src.main.java.org.frc10506.framework.scheduler.loop;
 
 import java.util.HashMap;
-import framework.src.main.java.org.frc1410.framework.phase.Phase;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.TaskScheduler;
-import framework.src.main.java.org.frc1410.framework.util.log.Logger;
+
+import framework.src.main.java.org.frc10506.framework.phase.Phase;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.TaskScheduler;
+import framework.src.main.java.org.frc10506.framework.util.log.Logger;
 
 import java.util.*;
 

@@ -1,6 +1,6 @@
-package framework.src.main.java.org.frc1410.framework.scheduler.task;
+package framework.src.main.java.org.frc10506.framework.scheduler.task;
 
-import framework.src.main.java.org.frc1410.framework.phase.Phase;
+import framework.src.main.java.org.frc10506.framework.phase.Phase;
 
 /**
  * A model for how long a task should survive. Tasks are checked for

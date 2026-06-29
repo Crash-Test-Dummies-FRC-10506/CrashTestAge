@@ -1,7 +1,7 @@
 package robot.src.main.java.org.frc10506.rebuilt2026.commands.DriveCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import framework.src.main.java.org.frc1410.framework.control.Axis;
+import framework.src.main.java.org.frc10506.framework.control.Axis;
 import robot.src.main.java.org.frc10506.rebuilt2026.subsystems.Drivetrain;
 
 public class DriveLooped extends Command {

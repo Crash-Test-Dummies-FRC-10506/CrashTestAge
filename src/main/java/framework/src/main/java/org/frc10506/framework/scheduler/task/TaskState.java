@@ -1,4 +1,4 @@
-package framework.src.main.java.org.frc1410.framework.scheduler.task;
+package framework.src.main.java.org.frc10506.framework.scheduler.task;
 
 /**
  * Models the current state of a task. States fall into three general categories:

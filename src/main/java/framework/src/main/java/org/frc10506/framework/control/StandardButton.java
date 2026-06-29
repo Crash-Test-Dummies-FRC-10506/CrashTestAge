@@ -1,6 +1,6 @@
-package framework.src.main.java.org.frc1410.framework.control;
+package framework.src.main.java.org.frc10506.framework.control;
 
-import framework.src.main.java.org.frc1410.framework.scheduler.task.TaskScheduler;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.TaskScheduler;
 
 public class StandardButton implements Button {
 

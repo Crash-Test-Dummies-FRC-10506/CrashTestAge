@@ -1,8 +1,8 @@
-package framework.src.main.java.org.frc1410.framework.scheduler.task.impl;
+package framework.src.main.java.org.frc10506.framework.scheduler.task.impl;
 
 import edu.wpi.first.wpilibj.RobotBase;
-import framework.src.main.java.org.frc1410.framework.scheduler.subsystem.TickedSubsystem;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.Task;
+import framework.src.main.java.org.frc10506.framework.scheduler.subsystem.TickedSubsystem;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.Task;
 
 /**
  * A wrapper task around {@link TickedSubsystem}s to call their

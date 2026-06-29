@@ -1,4 +1,4 @@
-package framework.src.main.java.org.frc1410.framework.phase;
+package framework.src.main.java.org.frc10506.framework.phase;
 
 public enum Phase {
 

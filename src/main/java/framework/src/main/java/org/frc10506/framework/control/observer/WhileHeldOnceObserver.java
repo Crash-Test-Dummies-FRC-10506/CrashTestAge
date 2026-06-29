@@ -1,8 +1,8 @@
-package framework.src.main.java.org.frc1410.framework.control.observer;
+package framework.src.main.java.org.frc10506.framework.control.observer;
 
-import framework.src.main.java.org.frc1410.framework.control.Button;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.LifecycleHandle;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.Observer;
+import framework.src.main.java.org.frc10506.framework.control.Button;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.LifecycleHandle;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.Observer;
 
 public class WhileHeldOnceObserver implements Observer {
 

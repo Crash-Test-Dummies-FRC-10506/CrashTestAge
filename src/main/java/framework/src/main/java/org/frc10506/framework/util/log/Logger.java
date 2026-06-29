@@ -1,9 +1,9 @@
-package framework.src.main.java.org.frc1410.framework.util.log;
-
-import framework.src.main.java.org.frc1410.framework.util.log.transport.Transport;
-import framework.src.main.java.org.frc1410.framework.util.log.transport.Transports;
+package framework.src.main.java.org.frc10506.framework.util.log;
 
 import java.util.*;
+
+import framework.src.main.java.org.frc10506.framework.util.log.transport.Transport;
+import framework.src.main.java.org.frc10506.framework.util.log.transport.Transports;
 
 public final class Logger {
 

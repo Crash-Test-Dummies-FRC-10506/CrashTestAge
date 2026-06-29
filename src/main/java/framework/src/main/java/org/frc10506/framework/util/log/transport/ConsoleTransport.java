@@ -1,6 +1,6 @@
-package framework.src.main.java.org.frc1410.framework.util.log.transport;
+package framework.src.main.java.org.frc10506.framework.util.log.transport;
 
-import framework.src.main.java.org.frc1410.framework.util.log.Log;
+import framework.src.main.java.org.frc10506.framework.util.log.Log;
 
 class ConsoleTransport implements Transport {
 

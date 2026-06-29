@@ -13,7 +13,7 @@ import robot.src.main.java.org.frc10506.rebuilt2026.subsystems.Drivetrain;
 public class DriveOnly extends SequentialCommandGroup {
   public DriveOnly(Drivetrain drivetrain) {
     addCommands(
-       new DriveAuto(drivetrain, 0, -0.5, 0).withTimeout(3.7) // drives back for 3.7 seconds
+       new DriveAuto(drivetrain, 0, -0.5, 0).withTimeout(2.5) // drives back for 2.5 seconds
     );
   }
 }

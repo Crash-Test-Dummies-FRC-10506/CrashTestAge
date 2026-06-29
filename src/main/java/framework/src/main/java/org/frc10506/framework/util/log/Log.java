@@ -1,4 +1,4 @@
-package framework.src.main.java.org.frc1410.framework.util.log;
+package framework.src.main.java.org.frc10506.framework.util.log;
 
 public class Log {
 

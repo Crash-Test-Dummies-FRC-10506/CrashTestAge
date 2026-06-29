@@ -1,7 +1,7 @@
-package framework.src.main.java.org.frc1410.framework.scheduler.task;
+package framework.src.main.java.org.frc10506.framework.scheduler.task;
 
-import framework.src.main.java.org.frc1410.framework.scheduler.loop.Loop;
-import framework.src.main.java.org.frc1410.framework.scheduler.task.lock.TaskLock;
+import framework.src.main.java.org.frc10506.framework.scheduler.loop.Loop;
+import framework.src.main.java.org.frc10506.framework.scheduler.task.lock.TaskLock;
 
 /**
  * Represents a task that is bound to a loop and being actively ticked. This class
