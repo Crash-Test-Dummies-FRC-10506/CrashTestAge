@@ -62,8 +62,8 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("Shooter Far Voltage", ShooterConstants.farvoltage);
 
     SmartDashboard.putData("Shooter PID", pidConstants);
-    SmartDashboard.putNumber("Shooter kV", ShooterConstants.kV);
-    SmartDashboard.putNumber("Shooter kS", ShooterConstants.kS);
+    SmartDashboard.putNumber("Shooter Feedforward (kV)", ShooterConstants.kV);
+    SmartDashboard.putNumber("Shooter Feedforward (kS)", ShooterConstants.kS);
     SmartDashboard.putNumber("Shooter Close Velocity", ShooterConstants.closevelocity);
     SmartDashboard.putNumber("Shooter Far Velocity", ShooterConstants.farvelocity);
   }
