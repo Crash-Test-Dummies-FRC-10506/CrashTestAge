@@ -3,16 +3,18 @@ package robot.src.main.java.org.frc10506.rebuilt2026.commands.ShooterCommands;
 import edu.wpi.first.wpilibj2.command.Command;
 import robot.src.main.java.org.frc10506.rebuilt2026.subsystems.Shooter;
 
-public class HighShootRawCommand extends Command {
+public class CustomPowerShooterCommand extends Command {
     private final Shooter shooter;
+    private final double power;
 
-    public HighShootRawCommand(Shooter shooter) {
+    public CustomPowerShooterCommand(Shooter shooter, double power) {
         this.shooter = shooter;
+        this.power = power;
     }
 
     @Override
     public void execute() {
-        this.shooter.setShooterVoltage(10);
+        this.shooter.setShooterRaw(power);
     }
 
     //@Override
@@ -22,7 +24,7 @@ public class HighShootRawCommand extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        this.shooter.setShooterVoltage(0);
+        this.shooter.setShooterRaw(0);
     }
 
 }

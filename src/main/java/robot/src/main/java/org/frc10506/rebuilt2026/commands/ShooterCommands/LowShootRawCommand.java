@@ -12,7 +12,7 @@ public class LowShootRawCommand extends Command {
 
     @Override
     public void execute() {
-        this.shooter.setShooterRaw(0.6);
+        this.shooter.setShooterVoltage(7.8);
     }
 
     //@Override
@@ -22,7 +22,7 @@ public class LowShootRawCommand extends Command {
 
     @Override
     public void end(boolean interrupted) {
-        this.shooter.setShooterRaw(0);
+        this.shooter.setShooterVoltage(0);
     }
 
 }
