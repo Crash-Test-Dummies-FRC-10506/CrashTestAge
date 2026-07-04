@@ -15,8 +15,6 @@ import com.revrobotics.ResetMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
-//import com.studica.frc.AHRS;
-//import com.studica.frc.AHRS.NavXComType;
 
 public class Drivetrain extends SubsystemBase {
 
@@ -27,21 +25,18 @@ public class Drivetrain extends SubsystemBase {
 
     private final MecanumDrive m_drive;
 
-    //private final AHRS m_gyro = new AHRS(NavXComType.kMXP_SPI);
-
     public Drivetrain() {
-        //m_gyro.reset();
 
         FrontLeft = new SparkMax(5, MotorType.kBrushless);
-  RearLeft  = new SparkMax(4, MotorType.kBrushless);
-  FrontRight = new SparkMax(3, MotorType.kBrushless);
-  RearRight = new SparkMax(2, MotorType.kBrushless);
+        RearLeft  = new SparkMax(4, MotorType.kBrushless);
+        FrontRight = new SparkMax(3, MotorType.kBrushless);
+        RearRight = new SparkMax(2, MotorType.kBrushless);
 
-SparkMaxConfig globleConfig = new SparkMaxConfig();
-SparkMaxConfig FrontLeftConfig = new SparkMaxConfig();
-SparkMaxConfig RearLeftConfig = new SparkMaxConfig();
-SparkMaxConfig FrontRightConfig = new SparkMaxConfig();
-SparkMaxConfig RearRightConfig = new SparkMaxConfig();
+        SparkMaxConfig globleConfig = new SparkMaxConfig();
+        SparkMaxConfig FrontLeftConfig = new SparkMaxConfig();
+        SparkMaxConfig RearLeftConfig = new SparkMaxConfig();
+        SparkMaxConfig FrontRightConfig = new SparkMaxConfig();
+        SparkMaxConfig RearRightConfig = new SparkMaxConfig();
 // Invert the right side motors
     globleConfig
       .smartCurrentLimit(50)
@@ -77,26 +72,13 @@ SparkMaxConfig RearRightConfig = new SparkMaxConfig();
     SendableRegistry.addChild(m_drive, RearLeft);
     SendableRegistry.addChild(m_drive, FrontRight);
     SendableRegistry.addChild(m_drive, RearRight);
+
+    SmartDashboard.putData(m_drive);
+    SmartDashboard.putData(m_field);
     }
 
     public void driveMechanum(double x, double y, double z) {
         m_drive.driveCartesian(x, y, z);
-    }
-
-    //private double xtuned = 0;
-    //private double ytuned = 0;
-
-    /*public Rotation2d getRot() {
-        return Rotation2d.fromDegrees(m_gyro.getYaw());
-    }
-
-    public void fieldCentric(double x, double y, double z) {
-        Rotation2d rot = getRot();
-        
-        xtuned = Math.max(Math.min(x, 1), -1);
-        ytuned = Math.max(Math.min(y, 1), -1);
-
-        m_drive.driveCartesian(xtuned, ytuned, z, rot);
     }
 
     private Pose2d m_poseEstimate = new Pose2d();
@@ -112,8 +94,13 @@ SparkMaxConfig RearRightConfig = new SparkMaxConfig();
         m_field.setRobotPose(m_poseEstimate);
     }
 
+    //@Override
+    //public void simulationPeriodic() { //AHHHHHHHHHHHHHHHHHHHHHHHH
+    //    m_field.setRobotPose(m_poseEstimate);
+    //}
+
     public Pose2d getPose() {
         return m_poseEstimate;
-    }*/
+    }
     
 }

@@ -9,7 +9,9 @@ import com.revrobotics.spark.ClosedLoopSlot;
 import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import robot.src.main.java.org.frc10506.rebuilt2026.util.Constants.ShooterConstants;
 
@@ -21,10 +23,11 @@ public class Shooter extends SubsystemBase {
 
   private SparkMaxConfig intakeConfig = new SparkMaxConfig();
   private SparkMaxConfig launcherConfig = new SparkMaxConfig();
+  private double mode = 0;
 
-  private PIDController pidConstants = new PIDController(0.1, 0, 0.0);
-  private double KS = 0.0;
-  private double KV = 0.0;
+  private PIDController pidConstants = new PIDController(0.01, 0, 0.0);
+  private double KS = 0.1;
+  private double KV = 0.001;
     
       public Shooter() {
         intakeConfig.smartCurrentLimit(60).inverted(true);
@@ -43,8 +46,10 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putData("Shooter PID", pidConstants);
         SmartDashboard.putNumber("Shooter Feedforward (kV)", KV);
         SmartDashboard.putNumber("Shooter Feedforward (kS)", KS);
+        SmartDashboard.putNumber("Shooter Mode:", mode);
       }
 
+    
     public void setShooterRaw(double power) {
       this.shooter.set(power);
     }
@@ -61,19 +66,37 @@ public class Shooter extends SubsystemBase {
         this.shooterintake.set(power);
     }
 
+    public Command setMode(double modetype) {
+        return runOnce(() -> {
+            mode = modetype;
+        });
+    }
+
   @Override
-  public void periodic() {  // TODO: clean this up a bit with the constants stuff
-    ShooterConstants.closevoltage = SmartDashboard.getNumber("Close Voltage (Near Hub)", 0);
-    ShooterConstants.farvoltage = SmartDashboard.getNumber("Far Voltage (Tower)", 0);
+  public void periodic() {  // TODO: clean this up a bit with the constants stuff and use finite state machine for modes
     ShooterConstants.closevelocity = SmartDashboard.getNumber("Close Velocity (Near Hub)", 0);
     ShooterConstants.farvelocity = SmartDashboard.getNumber("Far Velocity (Tower)", 0);
 
     launcherConfig.closedLoop.p(pidConstants.getP()).i(pidConstants.getI()).d(pidConstants.getD()).feedForward.kS(KS).kV(KV);
     shooter.configure(launcherConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-  
-    //SmartDashboard.putNumber("Shooter Close Voltage", ShooterConstants.closevoltage);
-    //SmartDashboard.putNumber("Shooter Far Voltage", ShooterConstants.farvoltage);
-    //SmartDashboard.putNumber("Shooter Close Velocity", ShooterConstants.closevelocity);
-    //SmartDashboard.putNumber("Shooter Far Velocity", ShooterConstants.farvelocity);
+
+    if (mode == 0) {
+      setShooterVelocity(0);
+    } else if (mode == 1) {
+      setShooterVelocity(ShooterConstants.closevelocity);
+    } else if (mode == 2) {
+      setShooterVelocity(ShooterConstants.farvelocity);
+    } else {
+      setShooterVelocity(0);
+    }
+  }
+
+  @Override
+  public void simulationPeriodic() {
+    ShooterConstants.closevelocity = SmartDashboard.getNumber("Close Velocity (Near Hub)", 0);
+    ShooterConstants.farvelocity = SmartDashboard.getNumber("Far Velocity (Tower)", 0);
+
+    launcherConfig.closedLoop.p(pidConstants.getP()).i(pidConstants.getI()).d(pidConstants.getD()).feedForward.kS(KS).kV(KV);
+    shooter.configure(launcherConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
 }
