@@ -43,8 +43,8 @@ public final class Robot extends PhaseDrivenRobot {
     private final NetworkTable table = this.nt.getTable("Auto");
 
     private final AutoSelector autoSelector = new AutoSelector()
-        .add("Main Auto (Drives back and shoot)", () -> new MainAuto(drivetrain, shooter))
-        .add("Drive back", () -> new DriveOnly(drivetrain));
+        .add("Main", () -> new MainAuto(drivetrain, shooter))
+        .add("Drive", () -> new DriveOnly(drivetrain));
 
     {
         {
@@ -84,6 +84,8 @@ public final class Robot extends PhaseDrivenRobot {
         var autoCommand = this.autoSelector.select(autoProfile);
 
         this.scheduler.scheduleAutoCommand(autoCommand);
+
+        System.out.println(autoProfile);
 
     }
 

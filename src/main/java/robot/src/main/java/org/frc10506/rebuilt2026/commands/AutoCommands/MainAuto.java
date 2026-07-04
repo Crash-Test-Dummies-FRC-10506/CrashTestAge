@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import robot.src.main.java.org.frc10506.rebuilt2026.commands.DriveCommands.DriveAuto;
 import robot.src.main.java.org.frc10506.rebuilt2026.commands.DriveCommands.DriveLooped;
-import robot.src.main.java.org.frc10506.rebuilt2026.commands.ShooterCommands.CustomPowerShooterCommand;
+import robot.src.main.java.org.frc10506.rebuilt2026.commands.ShooterCommands.CustomVoltageShooterCommand;
 import robot.src.main.java.org.frc10506.rebuilt2026.commands.ShooterCommands.IntaketoShooterCommand;
 import robot.src.main.java.org.frc10506.rebuilt2026.commands.ShooterCommands.LowShootRawCommand;
 import robot.src.main.java.org.frc10506.rebuilt2026.subsystems.Shooter;
@@ -18,7 +18,7 @@ public class MainAuto extends SequentialCommandGroup {
         new LowShootRawCommand(shooter), // power up flywheel to shoot
         new WaitCommand(3), // wait 3 secs
         new IntaketoShooterCommand(shooter).withTimeout(10), // shoots the balls with 10 seconds
-        new CustomPowerShooterCommand(shooter, 0) // stops the shooter
+        new CustomVoltageShooterCommand(shooter, 0) // stops the shooter
     );
   }
 }
