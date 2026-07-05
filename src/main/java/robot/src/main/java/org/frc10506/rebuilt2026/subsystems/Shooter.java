@@ -77,6 +77,9 @@ public class Shooter extends SubsystemBase {
     ShooterConstants.closevelocity = SmartDashboard.getNumber("Close Velocity (Near Hub)", 0);
     ShooterConstants.farvelocity = SmartDashboard.getNumber("Far Velocity (Tower)", 0);
 
+    SmartDashboard.putNumber("Current Shooter Velocity", shooter.getEncoder().getVelocity());
+    SmartDashboard.putNumber("NEO Power", shooter.get());
+
     launcherConfig.closedLoop.p(pidConstants.getP()).i(pidConstants.getI()).d(pidConstants.getD()).feedForward.kS(KS).kV(KV);
     shooter.configure(launcherConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
@@ -91,12 +94,12 @@ public class Shooter extends SubsystemBase {
     }
   }
 
-  @Override
+  /*@Override
   public void simulationPeriodic() {
     ShooterConstants.closevelocity = SmartDashboard.getNumber("Close Velocity (Near Hub)", 0);
     ShooterConstants.farvelocity = SmartDashboard.getNumber("Far Velocity (Tower)", 0);
 
     launcherConfig.closedLoop.p(pidConstants.getP()).i(pidConstants.getI()).d(pidConstants.getD()).feedForward.kS(KS).kV(KV);
     shooter.configure(launcherConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-  }
+  }*/
 }
