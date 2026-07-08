@@ -34,7 +34,7 @@ public class Shooter extends SubsystemBase {
         shooterintake.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         launcherConfig.inverted(true);
         launcherConfig.smartCurrentLimit(60);
-        launcherConfig.voltageCompensation(10);
+        //launcherConfig.voltageCompensation(12);
         launcherConfig.closedLoop // default values
             .p(ShooterConstants.kP)
             .i(ShooterConstants.kI)
@@ -47,7 +47,6 @@ public class Shooter extends SubsystemBase {
         SmartDashboard.putData("Shooter PID", pidConstants);
         SmartDashboard.putNumber("Shooter Feedforward (kV)", KV);
         SmartDashboard.putNumber("Shooter Feedforward (kS)", KS);
-        SmartDashboard.putNumber("Shooter Mode:", mode);
       }
 
     
@@ -79,6 +78,7 @@ public class Shooter extends SubsystemBase {
     ShooterConstants.farvelocity = SmartDashboard.getNumber("Far Velocity (Tower)", 0);
 
     SmartDashboard.putNumber("Current Shooter Velocity", shooter.getEncoder().getVelocity());
+    SmartDashboard.putNumber("Shooter Mode:", mode);
     SmartDashboard.putNumber("Shooter NEO Power", shooter.get());
 
     launcherConfig.closedLoop.p(pidConstants.getP()).i(pidConstants.getI()).d(pidConstants.getD()).feedForward.kS(KS).kV(KV);
