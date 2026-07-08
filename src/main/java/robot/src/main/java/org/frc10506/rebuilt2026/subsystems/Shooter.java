@@ -34,7 +34,7 @@ public class Shooter extends SubsystemBase {
         shooterintake.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         launcherConfig.inverted(true);
         launcherConfig.smartCurrentLimit(60);
-        //launcherConfig.voltageCompensation(12);
+        launcherConfig.voltageCompensation(10);
         launcherConfig.closedLoop // default values
             .p(ShooterConstants.kP)
             .i(ShooterConstants.kI)
