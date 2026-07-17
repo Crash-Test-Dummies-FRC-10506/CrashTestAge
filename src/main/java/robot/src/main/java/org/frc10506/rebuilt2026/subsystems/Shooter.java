@@ -16,10 +16,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import robot.src.main.java.org.frc10506.rebuilt2026.util.Constants.ShooterConstants;
 
 import static robot.src.main.java.org.frc10506.rebuilt2026.util.Constants.*;
+import static robot.src.main.java.org.frc10506.rebuilt2026.util.IDs.*;
 
-public class Shooter extends SubsystemBase {
-  public SparkMax shooterintake = new SparkMax(10, MotorType.kBrushless);
-  public SparkMax shooter = new SparkMax(6, MotorType.kBrushless);;
+public class Shooter extends SubsystemBase implements AutoCloseable {
+  public SparkMax shooterintake = new SparkMax(intake_id, MotorType.kBrushless);
+  public SparkMax shooter = new SparkMax(shooter_id, MotorType.kBrushless);;
 
   private SparkMaxConfig intakeConfig = new SparkMaxConfig();
   private SparkMaxConfig launcherConfig = new SparkMaxConfig();
@@ -34,7 +35,7 @@ public class Shooter extends SubsystemBase {
         shooterintake.configure(intakeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
         launcherConfig.inverted(true);
         launcherConfig.smartCurrentLimit(60);
-        launcherConfig.voltageCompensation(10);
+        //launcherConfig.voltageCompensation(10);
         launcherConfig.closedLoop // default values
             .p(ShooterConstants.kP)
             .i(ShooterConstants.kI)
@@ -93,6 +94,11 @@ public class Shooter extends SubsystemBase {
     } else {
       setShooterVelocity(0);
     }
+  }
+
+  @Override
+  public void close() {
+    shooter.close();
   }
 
   /*@Override

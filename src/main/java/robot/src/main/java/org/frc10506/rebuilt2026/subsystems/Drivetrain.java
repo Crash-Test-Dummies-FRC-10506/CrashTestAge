@@ -16,6 +16,8 @@ import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 
+import static robot.src.main.java.org.frc10506.rebuilt2026.util.IDs.*;
+
 public class Drivetrain extends SubsystemBase {
 
     private final SparkMax FrontLeft;
@@ -27,10 +29,10 @@ public class Drivetrain extends SubsystemBase {
 
     public Drivetrain() {
 
-        FrontLeft = new SparkMax(5, MotorType.kBrushless);
-        RearLeft  = new SparkMax(4, MotorType.kBrushless);
-        FrontRight = new SparkMax(3, MotorType.kBrushless);
-        RearRight = new SparkMax(2, MotorType.kBrushless);
+        FrontLeft = new SparkMax(FL_id, MotorType.kBrushless);
+        RearLeft  = new SparkMax(RL_id, MotorType.kBrushless);
+        FrontRight = new SparkMax(FR_id, MotorType.kBrushless);
+        RearRight = new SparkMax(RR_id, MotorType.kBrushless);
 
         SparkMaxConfig globleConfig = new SparkMaxConfig();
         SparkMaxConfig FrontLeftConfig = new SparkMaxConfig();
