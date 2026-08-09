@@ -8,7 +8,7 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
-def ROBOT_MAIN_CLASS = "robot.src.main.java.org.frc10506.rebuilt2026.Main"
+def ROBOT_MAIN_CLASS = "robot.src.main.java.org.frc10506.viridian.Main"
 
 // Define my targets (RoboRIO) and artifacts (deployable files)
 // This is added by GradleRIO's backing project DeployUtils.
