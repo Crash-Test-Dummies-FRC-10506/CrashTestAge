@@ -2,7 +2,9 @@ package framework.src.main.java.org.frc10506.framework;
 
 import edu.wpi.first.net.WebServer;
 import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import framework.src.main.java.org.frc10506.framework.phase.Phase;
 import framework.src.main.java.org.frc10506.framework.phase.PhaseController;
 import framework.src.main.java.org.frc10506.framework.scheduler.loop.Loop;
@@ -10,6 +12,8 @@ import framework.src.main.java.org.frc10506.framework.scheduler.subsystem.Subsys
 import framework.src.main.java.org.frc10506.framework.scheduler.subsystem.TickedSubsystem;
 import framework.src.main.java.org.frc10506.framework.scheduler.task.TaskScheduler;
 import framework.src.main.java.org.frc10506.framework.util.log.Logger;
+import robot.src.main.java.org.frc10506.viridian.util.PhaseTimer;
+import framework.src.main.java.org.frc10506.framework.control.Controller;
 
 /**
  * The base robot type that all robots can extend to access the scheduling and
@@ -29,6 +33,13 @@ import framework.src.main.java.org.frc10506.framework.util.log.Logger;
 public abstract class PhaseDrivenRobot extends TimedRobot {
 
     private static final Logger LOG = new Logger("Robot");
+    private final Controller controller = new Controller(this.scheduler, 0, 0.1);
+    private final PhaseTimer phaseTimer = new PhaseTimer();
+    private PhaseTimer.Phase lastPhase = null;
+    private double[] rumblePattern = null;
+    private int rumblePatternIndex = 0;
+    private double rumbleStepEndTime = 0;
+    private boolean warningRumbleSent = false;
 
     protected final TaskScheduler scheduler = new TaskScheduler();
     protected final PhaseController phaseController = new PhaseController(scheduler);
@@ -124,6 +135,7 @@ public abstract class PhaseDrivenRobot extends TimedRobot {
     @Override
     public final void teleopInit() {
         phaseController.transition(Phase.TELEOP);
+        phaseTimer.markTeleopStart();
         teleopSequence();
     }
 
@@ -172,7 +184,51 @@ public abstract class PhaseDrivenRobot extends TimedRobot {
 
     @Override
     public final void teleopPeriodic() {
+        PhaseTimer.Phase currentPhase = phaseTimer.getCurrentPhase();
+        double remaining = phaseTimer.getSecondsRemainingInCurrentPhase();
 
+        if (remaining <= 5.0 && remaining > 4.5 && !warningRumbleSent && rumblePattern == null) {
+      // Pattern: on 0.15s, off 0.1s, on 0.15s, off 0.1s, on 0.15s
+      rumblePattern = new double[]{0.15, 0.1, 0.15, 0.1, 0.15};
+      rumblePatternIndex = 0;
+      rumbleStepEndTime = 0;
+      warningRumbleSent = true;
+    }
+
+    if (lastPhase != null && currentPhase != lastPhase) {
+      rumblePattern = new double[]{0.8};
+      rumblePatternIndex = 0;
+      rumbleStepEndTime = 0;
+      warningRumbleSent = false;
+    }
+    lastPhase = currentPhase;
+
+    double now = edu.wpi.first.wpilibj.Timer.getFPGATimestamp();
+    if (rumblePattern != null) {
+      if (rumbleStepEndTime == 0) {
+        boolean isOn = (rumblePatternIndex % 2) == 0;
+        this.controller.setRumble(isOn);
+        if (isOn) System.out.println("Rumble triggered");
+        rumbleStepEndTime = now + rumblePattern[rumblePatternIndex];
+      } else if (now >= rumbleStepEndTime) {
+        rumblePatternIndex++;
+        if (rumblePatternIndex >= rumblePattern.length) {
+          // Pattern done
+          this.controller.setRumble(false);
+          rumblePattern = null;
+        } else {
+          boolean isOn = (rumblePatternIndex % 2) == 0;
+          if (isOn) System.out.println("Rumble triggered");
+          this.controller.setRumble(isOn);
+          rumbleStepEndTime = now + rumblePattern[rumblePatternIndex];
+        }
+      }
+    }
+
+        SmartDashboard.putString("Phase/Current", currentPhase.name());
+        SmartDashboard.putNumber("Phase/ElapsedSec", phaseTimer.getElapsedSec());
+        SmartDashboard.putNumber("Phase/SecsInPhase", phaseTimer.getSecondsIntoCurrentPhase());
+        SmartDashboard.putNumber("Phase/SecsRemaining", phaseTimer.getSecondsRemainingInCurrentPhase());
     }
 
     @Override

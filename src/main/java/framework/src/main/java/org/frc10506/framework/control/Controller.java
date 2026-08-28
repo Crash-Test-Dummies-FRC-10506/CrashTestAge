@@ -53,8 +53,9 @@ public class Controller {
         this.deadzone = deadzone;
     }
 
-    private void setRumble(boolean rumbling) {
+    public void setRumble(boolean rumbling) {
         backingController.setRumble(GenericHID.RumbleType.kBothRumble, rumbling ? 1 : 0);
+        if (rumbling) System.out.println("actually rumbled");
     }
 
     public void rumble(long durationMillis) {
