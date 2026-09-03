@@ -23,7 +23,9 @@ import robot.src.main.java.org.frc10506.viridian.util.NetworkTables;
 import static robot.src.main.java.org.frc10506.viridian.util.IDs.*;
 
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 
 public final class Robot extends PhaseDrivenRobot {
 
@@ -41,8 +43,18 @@ public final class Robot extends PhaseDrivenRobot {
     private final ShooterFeederCommand shooterFeederCommand = new ShooterFeederCommand(shooter, -1);
     private final ShooterButVoltageCommand shooterButVoltageCommand = new ShooterButVoltageCommand(shooter, 6.25); // I think this is a good voltage lololol
     private final ShooterButVoltageCommand highshooterButVoltageCommand = new ShooterButVoltageCommand(shooter, 7.4);
+    private final SendableChooser<Command> m_autoChooser = new SendableChooser<>();
 
-    private final NetworkTableInstance nt = NetworkTableInstance.getDefault();
+    private void configureAutos() {
+        m_autoChooser.addOption("Main Auto", new MainAuto(drive, shooter));
+        SmartDashboard.putData("Auto Chooser", m_autoChooser);
+    }
+
+    public Robot() {
+        configureAutos();
+    }
+
+    /*private final NetworkTableInstance nt = NetworkTableInstance.getDefault();
     private final NetworkTable table = this.nt.getTable("Auto");
 
     private final AutoSelector autoSelector = new AutoSelector()
@@ -70,10 +82,11 @@ public final class Robot extends PhaseDrivenRobot {
     );
 
     private final StringSubscriber autoSubscriber = NetworkTables.SubscriberFactory(this.table, this.autoPublisher.getTopic());
+    */
 
     @Override
     public void autonomousSequence() {
-        NetworkTables.SetPersistence(this.autoPublisher.getTopic(), true);
+        /*NetworkTables.SetPersistence(this.autoPublisher.getTopic(), true);
         String autoProfile = this.autoSubscriber.get();
 
         if (autoProfile == null || autoProfile.isEmpty()) {
@@ -87,6 +100,9 @@ public final class Robot extends PhaseDrivenRobot {
         this.scheduler.scheduleAutoCommand(autoCommand);
 
         System.out.println(autoProfile);
+        */
+        this.scheduler.scheduleAutoCommand(m_autoChooser.getSelected());
+        System.out.println(m_autoChooser.getSelected());
     }
 
     @Override

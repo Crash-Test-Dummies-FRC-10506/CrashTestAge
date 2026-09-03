@@ -1,38 +1,68 @@
-[{
-    "tabName": "Drive",
-    "id": "drive",
-
-    "components": [{
-        "type": "string_select",
-        "title": "Auto Selection",
-        "layout": {
-            "pos": [1, 1],
-            "size": [2, 1]
-        },
-        "topics": ["/Auto/Choices", "/Auto/Selection"]
-    }, {
-        "type": "clock",
-        "title": "Game Time",
-        "layout": {
-            "pos": [3, 1],
-            "size": [2, 1]
-        },
-        "topics": ["/FMSInfo/GameTime"]
-    }, {
-        "type": "boolean",
-        "title": "L'Bork Line Break",
-        "layout": {
-            "pos": [5, 1],
-            "size": [1, 1]
-        },
-        "topics": ["/Intake/Has Note"]
-    }, {
-        "type": "rpm",
-        "title": "Shooter RPM",
-        "layout": {
-            "pos": [6, 1],
-            "size": [1, 1]
-        },
-        "topics": ["/Shooter/RPM", "/Shooter/RPM Setpoint", "/Shooter/RPM Adjustment"]
-    }]
-}]
+{
+  "version": 1.0,
+  "grid_size": 128,
+  "tabs": [
+    {
+      "name": "Teleoperated",
+      "grid_layout": {
+        "layouts": [],
+        "containers": [
+          {
+            "title": "Current Phase",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 384.0,
+            "height": 384.0,
+            "type": "Large Text Display",
+            "properties": {
+              "topic": "/SmartDashboard/Current Phase",
+              "period": 0.06,
+              "data_type": "string"
+            }
+          },
+          {
+            "title": "Seconds Remaining In Phase",
+            "x": 384.0,
+            "y": 0.0,
+            "width": 384.0,
+            "height": 384.0,
+            "type": "Match Time",
+            "properties": {
+              "topic": "/SmartDashboard/Seconds Remaining In Phase",
+              "period": 0.06,
+              "data_type": "double",
+              "time_display_mode": "Minutes and Seconds",
+              "red_start_time": 20,
+              "yellow_start_time": 30
+            }
+          },
+          {
+            "title": "Auto Chooser",
+            "x": 0.0,
+            "y": 384.0,
+            "width": 256.0,
+            "height": 128.0,
+            "type": "ComboBox Chooser",
+            "properties": {
+              "topic": "/SmartDashboard/Auto Chooser",
+              "period": 0.06,
+              "sort_options": false
+            }
+          },
+          {
+            "title": "FMSInfo",
+            "x": 768.0,
+            "y": 0.0,
+            "width": 384.0,
+            "height": 128.0,
+            "type": "FMSInfo",
+            "properties": {
+              "topic": "/FMSInfo",
+              "period": 0.06
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

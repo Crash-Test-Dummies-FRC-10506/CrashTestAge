@@ -225,10 +225,10 @@ public abstract class PhaseDrivenRobot extends TimedRobot {
       }
     }
 
-        SmartDashboard.putString("Phase/Current", currentPhase.name());
-        SmartDashboard.putNumber("Phase/ElapsedSec", phaseTimer.getElapsedSec());
-        SmartDashboard.putNumber("Phase/SecsInPhase", phaseTimer.getSecondsIntoCurrentPhase());
-        SmartDashboard.putNumber("Phase/SecsRemaining", phaseTimer.getSecondsRemainingInCurrentPhase());
+        SmartDashboard.putString("Current Phase", currentPhase.name());
+        //SmartDashboard.putNumber("Phase/ElapsedSec", phaseTimer.getElapsedSec());
+        //SmartDashboard.putNumber("Phase/SecsInPhase", phaseTimer.getSecondsIntoCurrentPhase());
+        SmartDashboard.putNumber("Seconds Remaining In Phase", phaseTimer.getSecondsRemainingInCurrentPhase());
     }
 
     @Override

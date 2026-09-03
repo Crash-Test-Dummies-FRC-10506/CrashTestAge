@@ -83,8 +83,8 @@ SparkMaxConfig RearRightConfig = new SparkMaxConfig();
     SendableRegistry.addChild(m_drive, FrontRight);
     SendableRegistry.addChild(m_drive, RearRight);
 
-    SmartDashboard.putData(m_drive);
-    SmartDashboard.putData(m_field);
+    //SmartDashboard.putData(m_drive);
+    //SmartDashboard.putData(m_field);
     }
 
     public void driveMechanum(double x, double y, double z) {
