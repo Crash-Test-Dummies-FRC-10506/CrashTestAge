@@ -1,6 +1,8 @@
 package robot.src.main.java.org.frc10506.viridian;
 // I devoured shake shack's cheese sauce while working on this midnight
 
+import static edu.wpi.first.units.Units.Volts;
+
 import framework.src.main.java.org.frc10506.framework.AutoSelector;
 import framework.src.main.java.org.frc10506.framework.PhaseDrivenRobot;
 import framework.src.main.java.org.frc10506.framework.control.Controller;
@@ -14,6 +16,7 @@ import robot.src.main.java.org.frc10506.viridian.commands.DriveLooped;
 import robot.src.main.java.org.frc10506.viridian.commands.MainAuto;
 import robot.src.main.java.org.frc10506.viridian.commands.ShooterButVoltageCommand;
 import robot.src.main.java.org.frc10506.viridian.commands.ShooterCommand;
+import robot.src.main.java.org.frc10506.viridian.commands.SystemChecks;
 import robot.src.main.java.org.frc10506.viridian.commands.ShooterFeederCommand;
 import robot.src.main.java.org.frc10506.viridian.commands.ShooterOnly;
 import robot.src.main.java.org.frc10506.viridian.subsystems.MechanumDrive;
@@ -44,6 +47,7 @@ public final class Robot extends PhaseDrivenRobot {
     private final ShooterButVoltageCommand shooterButVoltageCommand = new ShooterButVoltageCommand(shooter, 6.25); // I think this is a good voltage lololol
     private final ShooterButVoltageCommand highshooterButVoltageCommand = new ShooterButVoltageCommand(shooter, 7.4);
     private final SendableChooser<Command> m_autoChooser = new SendableChooser<>();
+    private final SystemChecks systemChecks;
 
     private void configureAutos() {
         m_autoChooser.addOption("Main Auto", new MainAuto(drive, shooter));
@@ -51,56 +55,12 @@ public final class Robot extends PhaseDrivenRobot {
     }
 
     public Robot() {
+        systemChecks = new SystemChecks(shooter, drive);
         configureAutos();
     }
 
-    /*private final NetworkTableInstance nt = NetworkTableInstance.getDefault();
-    private final NetworkTable table = this.nt.getTable("Auto");
-
-    private final AutoSelector autoSelector = new AutoSelector()
-        .add("Main", () -> new MainAuto(drive, shooter))
-        .add("Shoot", () -> new ShooterOnly(shooter));
-
-    {
-        {
-            var profiles = new String[this.autoSelector.getProfiles().size()];
-            for (var i = 0; i < profiles.length; i++) {
-                profiles[i] = this.autoSelector.getProfiles().get(i).name();
-            }
-
-            var autoChoicesPub = NetworkTables.PublisherFactory(this.table, "Choices", profiles);
-            autoChoicesPub.accept(profiles);
-        }
-    }
-
-    private final StringPublisher autoPublisher = NetworkTables.PublisherFactory(
-        this.table,
-        "Profile",
-        this.autoSelector.getProfiles().isEmpty() ? "" : this.autoSelector.getProfiles().
-        get(0)
-        .name()
-    );
-
-    private final StringSubscriber autoSubscriber = NetworkTables.SubscriberFactory(this.table, this.autoPublisher.getTopic());
-    */
-
     @Override
     public void autonomousSequence() {
-        /*NetworkTables.SetPersistence(this.autoPublisher.getTopic(), true);
-        String autoProfile = this.autoSubscriber.get();
-
-        if (autoProfile == null || autoProfile.isEmpty()) {
-            if (!this.autoSelector.getProfiles().isEmpty()) {
-                autoProfile = this.autoSelector.getProfiles().get(0).name();
-            }
-        }
-
-        var autoCommand = this.autoSelector.select(autoProfile);
-
-        this.scheduler.scheduleAutoCommand(autoCommand);
-
-        System.out.println(autoProfile);
-        */
         this.scheduler.scheduleAutoCommand(m_autoChooser.getSelected());
         System.out.println(m_autoChooser.getSelected());
     }
@@ -118,13 +78,14 @@ public final class Robot extends PhaseDrivenRobot {
 
         this.operatorController.RIGHT_BUMPER.whileHeld(highshooterButVoltageCommand, TaskPersistence.GAMEPLAY);
         this.driverController.RIGHT_BUMPER.whileHeld(shooterFeederCommand, TaskPersistence.GAMEPLAY);
-        this.operatorController.LEFT_BUMPER.whileHeld(shooterButVoltageCommand, TaskPersistence.GAMEPLAY);
+        this.driverController.LEFT_BUMPER.whileHeld(shooterButVoltageCommand, TaskPersistence.GAMEPLAY);
         this.operatorController.A.whileHeld(unjamFeederCommand, TaskPersistence.GAMEPLAY);
         this.operatorController.B.whileHeld(unjamShooterCommand, TaskPersistence.GAMEPLAY);
     }
 
     @Override
     public void testSequence() {
+    
     }
 
     @Override

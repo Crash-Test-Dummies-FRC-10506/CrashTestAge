@@ -19,6 +19,7 @@ public class PhaseTimer {
 	private static final double SHIFT3_END = 85.0;             // 60 - 85
 	private static final double SHIFT4_END = 110.0;            // 85 - 110
 	private static final double ENDGAME_DURATION = 30.0;       // "last 30 seconds"
+	// 330
 
 	private double teleopStartSec = -1.0;
 
@@ -83,6 +84,11 @@ public class PhaseTimer {
 
 	public double getSecondsRemainingInCurrentPhase() {
 		return Math.max(0.0, getCurrentPhaseDurationSec() - getSecondsIntoCurrentPhase());
+	}
+
+	public double getSecondsRemainingMatchTime() {
+		double totalMatchTime = 140.0;
+		return Math.max(0.0, totalMatchTime - getElapsedSec());
 	}
 
 }

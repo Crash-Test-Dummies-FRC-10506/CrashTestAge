@@ -19,6 +19,11 @@ public class ShooterCommand extends Command{
     }
 
     @Override
+    public void execute() {
+        this.shooter.setShooterSpeed(power);
+    }
+
+    @Override
     public void end(boolean isInterupted) {
         this.shooter.setShooterSpeed(0);
     }

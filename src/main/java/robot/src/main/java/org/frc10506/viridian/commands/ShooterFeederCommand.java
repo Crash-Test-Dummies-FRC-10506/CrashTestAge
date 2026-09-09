@@ -14,14 +14,15 @@ public class ShooterFeederCommand extends Command{
     }
 
     @Override
+    public void initialize() {
+        this.shooter.setFeederSpeed(power);
+    }
+
+    @Override
     public void execute() {
         this.shooter.setFeederSpeed(power);
     }
     
-    /*@Override
-    public boolean isFinished() {
-        return true;
-    }*/
     @Override
     public void end(boolean isInterupted) {
         this.shooter.setFeederSpeed(0);

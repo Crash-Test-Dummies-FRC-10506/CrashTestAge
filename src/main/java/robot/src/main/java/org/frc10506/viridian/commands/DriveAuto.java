@@ -20,6 +20,10 @@ public class DriveAuto extends Command {
         this.rot = rot;
     }
 
+    @Override
+    public void initialize() {
+        this.drivetrain.driveMechanum(x, y, rot);
+    }
 
     @Override
     public void execute() {

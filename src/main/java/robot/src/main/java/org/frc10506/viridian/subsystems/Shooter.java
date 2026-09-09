@@ -16,6 +16,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 
 public class Shooter implements TickedSubsystem {
 
@@ -41,7 +42,7 @@ public class Shooter implements TickedSubsystem {
     public void setShooterRPM(double rpm) {
         this.shooter.setVoltage((rpm / 5500) * 12);
     }
-
+ 
     public void setFeederSpeed(double speed) {
         this.feeder.set(speed);
     }
