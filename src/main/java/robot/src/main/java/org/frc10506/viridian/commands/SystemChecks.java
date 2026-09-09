@@ -28,6 +28,6 @@ public class SystemChecks {
     }
 
     public Command intake(Shooter shooter) {
-        return new ShooterFeederCommand(shooter, 1).withTimeout(1.5);
+        return new ShooterFeederCommand(shooter, -1).withTimeout(1.5);
     }
 }
